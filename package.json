@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/LucasMcL/data-explorer/issues"
   },
-  "homepage": "https://github.com/LucasMcL/data-explorer#readme"
+  "homepage": "https://github.com/LucasMcL/data-explorer#readme",
+  "dependencies": {
+    "bookshelf": "^0.10.3",
+    "express": "^4.15.2",
+    "knex": "^0.13.0",
+    "pg": "^6.1.5"
+  }
 }
