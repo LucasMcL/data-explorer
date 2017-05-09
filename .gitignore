@@ -1,4 +1,5 @@
 client/lib
+.env
 
 # Logs
 logs
