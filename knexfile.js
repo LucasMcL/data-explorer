@@ -1,15 +1,15 @@
 module.exports = {
 
-  // test: {
-  //   client: 'pg',
-  //   connection: 'postgres://localhost/data_explorer_test',
-  //   migrations: {
-  //     directory: __dirname + '/db/migrations'
-  //   },
-  //   seeds: {
-  //     directory: __dirname + '/db/seeds/test'
-  //   }
-  // },
+  test: {
+    client: 'pg',
+    connection: 'postgres://localhost/data_explorer_test',
+    migrations: {
+      directory: __dirname + '/db/migrations'
+    },
+    seeds: {
+      directory: __dirname + '/db/seeds'
+    }
+  },
   development: {
     client: 'pg',
     // debug: true,
