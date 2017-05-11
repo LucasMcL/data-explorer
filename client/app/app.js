@@ -1,4 +1,4 @@
-const app = angular.module('DataExplorer', ['ngRoute', 'ng-fusioncharts', 'ui.grid'])
+const app = angular.module('DataExplorer', ['ngRoute', 'ng-fusioncharts', 'ui.grid', 'ngAnimate', 'ngTouch'])
 
 // Config
 app.config(($routeProvider, $locationProvider) => {
