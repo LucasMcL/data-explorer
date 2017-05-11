@@ -13,7 +13,9 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
   }
 
   // Read CSV file, convert to array of objects and attach to scope
+  // Attach column names to columnDefs
   // If first var is blank, replace with var name "row"
+  // Scope refresh and ui grid refresh
   function upload(evt) {
     console.log('upload')
     let file = evt.target.files[0]
@@ -30,12 +32,14 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
       $scope.grid.columnDefs = []
       varNames.forEach(name => $scope.grid.columnDefs.push({field: name}))
       $scope.$apply()
-      $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.ALL )
+      // $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.ALL )
     }
     reader.onerror = function() {
       console.log('error reading file')
     }
   }
+
+
 })
 
 
