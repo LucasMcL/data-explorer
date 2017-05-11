@@ -7,9 +7,10 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
   $scope.grid = {
     columnDefs: [],
     data: [],
-    onRegisterApi: function(gridApi) {
-      $scope.gridApi = gridApi
-    }
+    enableHorizontalScrollbar: 2
+    // onRegisterApi: function(gridApi) {
+    //   $scope.gridApi = gridApi
+    // }
   }
 
   // Read CSV file, convert to array of objects and attach to scope
@@ -30,7 +31,7 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
       $scope.grid.data = parsedData
       const varNames = Object.keys(parsedData[0])
       $scope.grid.columnDefs = []
-      varNames.forEach(name => $scope.grid.columnDefs.push({field: name}))
+      varNames.forEach(name => $scope.grid.columnDefs.push({field: name, minWidth: 100}))
       $scope.$apply()
       // $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.ALL )
     }

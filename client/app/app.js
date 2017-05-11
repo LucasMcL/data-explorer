@@ -1,4 +1,12 @@
-const app = angular.module('DataExplorer', ['ngRoute', 'ng-fusioncharts', 'ui.grid', 'ngAnimate', 'ngTouch', 'ui.grid.autoResize'])
+const app = angular.module('DataExplorer',
+  ['ngRoute',
+  'ng-fusioncharts',
+  'ui.grid',
+  'ngAnimate',
+  'ngTouch',
+  'ui.grid.autoResize',
+  'ui.grid.resizeColumns',
+  'ui.grid.moveColumns'])
 
 // Config
 app.config(($routeProvider, $locationProvider) => {
