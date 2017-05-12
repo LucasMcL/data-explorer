@@ -13,36 +13,14 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
 
   // chart data and options
   $scope.chartSource = {
-    chart: {
-      caption: "Harry's SuperMart",
-      subCaption: "Top 5 stores in last month by revenue",
-      exportEnabled: 1,
-    },
-    data: [{
-          label: "Bakersfield Central",
-          value: "880000"
-      },
-      {
-          label: "Garden Groove harbour",
-          value: "730000"
-      },
-      {
-          label: "Los Angeles Topanga",
-          value: "590000"
-      },
-      {
-          label: "Compton-Rancho Dom",
-          value: "520000"
-      },
-      {
-          label: "Daly City Serramonte",
-          value: "330000"
-      }]
-    }
+    chart: {},
+    data: []
+  }
 
   // save dataset variable names here
   $scope.varNames = []
 
+  // save selected chartType here
   $scope.chartType
 
   // Read CSV file, convert to array of objects and attach to scope
@@ -72,10 +50,6 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     reader.onerror = function() {
       console.log('error reading file')
     }
-  }
-
-  $scope.sayHello = function(chartType) {
-    console.log('hello, ' + chartType)
   }
 
   /**
@@ -118,8 +92,27 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     return types
   }
 
-  $scope.compileChart = function(chartType) {
+  $scope.updateChart = function(chartType) {
     $scope.chartType = chartType
+  }
+
+  // TODO: check for if labels exist or not
+  $scope.updateLabels = function(labels) {
+    if(!labels) return
+    const allData = $scope.grid.data
+    if($scope.chartSource.data.length === 0) {
+      allData.forEach(datum => $scope.chartSource.data.push({label: String(datum[labels])}))
+    }
+    console.log($scope.chartSource.data)
+  }
+
+  $scope.updateValues = function(values) {
+    if(!values) return
+    const allData = $scope.grid.data
+
+    allData.forEach((datum, i) => {
+      $scope.chartSource.data[i].value = datum[values]
+    })
   }
 
 })

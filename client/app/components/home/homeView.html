@@ -14,20 +14,20 @@
 	  	</div>
 	    <label for="chart-type" class="col-sm-1 control-label">Chart</label>
 	    <div class="col-sm-3">
-				<select ng-model="chartType" ng-change="compileChart(chartType)" id="chart-type" class="form-control">
+				<select ng-model="chartType" ng-change="updateChart(chartType)" id="chart-type" class="form-control">
 					<option value="column2d">Column chart</option>
 					<option value="line">Line chart</option>
 					<option value="pie2d">Pie chart</option>
 				</select>
 	    </div>
-	    <label for="x-var" class="col-sm-1 control-label">X</label>
+	    <label for="labels" class="col-sm-1 control-label">Labels</label>
 	    <div class="col-sm-2">
-				<select ng-model="xVar" ng-change="sayHello(xVar)" id="x-var" class="form-control" ng-options="var for var in varNames">
+				<select ng-model="labels" ng-change="updateLabels(labels)" id="labels" class="form-control" ng-options="var for var in varNames">
 				</select>
 	    </div>
-	    <label for="y-var" class="col-sm-1 control-label">Y</label>
+	    <label for="values" class="col-sm-1 control-label">Values</label>
 	    <div class="col-sm-2">
-				<select ng-model="yVar" ng-change="sayHello(yVar)" id="y-var" class="form-control" ng-options="var for var in varNames">
+				<select ng-model="values" ng-change="updateValues(values)" id="values" class="form-control" ng-options="var for var in varNames">
 				</select>
 	    </div>
 	  </div>
