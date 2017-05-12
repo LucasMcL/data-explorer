@@ -15,8 +15,9 @@
 	    <label for="chart-type" class="col-sm-1 control-label">Chart</label>
 	    <div class="col-sm-3">
 				<select ng-model="chartType" ng-change="compileChart(chartType)" id="chart-type" class="form-control">
-					<option value="bar2d">Column chart</option>
+					<option value="column2d">Column chart</option>
 					<option value="line">Line chart</option>
+					<option value="pie2d">Pie chart</option>
 				</select>
 	    </div>
 	    <label for="x-var" class="col-sm-1 control-label">X</label>
@@ -40,7 +41,33 @@
 			 ui-grid-move-columns></div>
 
 	<!-- chart -->
-	<div class="chart-container"></div>
+	<div ng-switch="chartType">
+		<div id="chart",
+	    fusioncharts
+	    ng-switch-when="column2d"
+	    width="600"
+	    height="400"
+	    type="column2d"
+	    datasource="{{chartSource}}"
+    ></div>
+		<div id="chart",
+	    fusioncharts
+	    ng-switch-when="line"
+	    width="600"
+	    height="400"
+	    type="line"
+	    datasource="{{chartSource}}"
+    ></div>
+		<div id="chart",
+	    fusioncharts
+	    ng-switch-when="pie2d"
+	    width="600"
+	    height="400"
+	    type="pie2d"
+	    datasource="{{chartSource}}"
+    ></div>
+		<div ng-switch-default>Please select a chart type</div>
+	</div>
 
 </div>
 

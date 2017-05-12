@@ -43,6 +43,8 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   // save dataset variable names here
   $scope.varNames = []
 
+  $scope.chartType
+
   // Read CSV file, convert to array of objects and attach to scope
   // Attach column names to columnDefs
   // If first var is blank, replace with var name "row"
@@ -117,15 +119,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   }
 
   $scope.compileChart = function(chartType) {
-    const newChart =
-    `<fusioncharts id="chart",
-    width="600"
-    height="400"
-    type="pie2d"
-    datasource="{{chartSource}}"
-    ></fusioncharts>`
-
-    $('.chart-container').append($compile(newChart)($scope))
+    $scope.chartType = chartType
   }
 
 })
