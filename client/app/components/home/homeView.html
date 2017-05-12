@@ -21,12 +21,12 @@
 	    </div>
 	    <label for="x-var" class="col-sm-1 control-label">X</label>
 	    <div class="col-sm-2">
-				<select ng-model="xVar" ng-change="sayHello(xVar)" id="x-var" class="form-control" ng-options="var for var in vars">
+				<select ng-model="xVar" ng-change="sayHello(xVar)" id="x-var" class="form-control" ng-options="var for var in varNames">
 				</select>
 	    </div>
 	    <label for="y-var" class="col-sm-1 control-label">Y</label>
 	    <div class="col-sm-2">
-				<select ng-model="yVar" ng-change="sayHello(yVar)" id="y-var" class="form-control" ng-options="var for var in vars">
+				<select ng-model="yVar" ng-change="sayHello(yVar)" id="y-var" class="form-control" ng-options="var for var in varNames">
 				</select>
 	    </div>
 	  </div>

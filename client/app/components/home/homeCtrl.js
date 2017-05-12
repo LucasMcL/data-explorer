@@ -7,11 +7,11 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
   $scope.grid = {
     columnDefs: [],
     data: [],
-    enableHorizontalScrollbar: 2
+    enableHorizontalScrollbar: 2 // will be enabled when needed
   }
 
-  // save dataset variables here
-  $scope.vars = []
+  // save dataset variable names here
+  $scope.varNames = []
 
   // Read CSV file, convert to array of objects and attach to scope
   // Attach column names to columnDefs
@@ -30,10 +30,10 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
       const parsedData = $.csv.toObjects(csvData)
       const convertedData = convertData(parsedData)
       $scope.grid.data = convertedData
-      $scope.grid.columnDefs = []; $scope.vars = []
+      $scope.grid.columnDefs = []; $scope.varNames = []
       for(header in convertedData[0]) {
         $scope.grid.columnDefs.push({field: header, minWidth: 100})
-        $scope.vars.push(header)
+        $scope.varNames.push(header)
       }
       $scope.$apply()
     }
