@@ -14,7 +14,7 @@
 	  	</div>
 	    <label for="chart-type" class="col-sm-1 control-label">Chart</label>
 	    <div class="col-sm-3">
-				<select ng-model="chartType" ng-change="sayHello(chartType)" id="chart-type" class="form-control">
+				<select ng-model="chartType" ng-change="compileChart(chartType)" id="chart-type" class="form-control">
 					<option value="bar2d">Column chart</option>
 					<option value="line">Line chart</option>
 				</select>
@@ -40,7 +40,7 @@
 			 ui-grid-move-columns></div>
 
 	<!-- chart -->
-	<div></div>
+	<div class="chart-container"></div>
 
 </div>
 

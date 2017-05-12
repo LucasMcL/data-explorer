@@ -1,14 +1,44 @@
-app.controller('HomeCtrl', function($scope, uiGridConstants) {
+app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants) {
   console.log('Home control instantiated')
 
   // Read file on file input event
   $('#file-input').change(upload)
 
+  // grid data and options
   $scope.grid = {
     columnDefs: [],
     data: [],
     enableHorizontalScrollbar: 2 // will be enabled when needed
   }
+
+  // chart data and options
+  $scope.chartSource = {
+    chart: {
+      caption: "Harry's SuperMart",
+      subCaption: "Top 5 stores in last month by revenue",
+      exportEnabled: 1,
+    },
+    data: [{
+          label: "Bakersfield Central",
+          value: "880000"
+      },
+      {
+          label: "Garden Groove harbour",
+          value: "730000"
+      },
+      {
+          label: "Los Angeles Topanga",
+          value: "590000"
+      },
+      {
+          label: "Compton-Rancho Dom",
+          value: "520000"
+      },
+      {
+          label: "Daly City Serramonte",
+          value: "330000"
+      }]
+    }
 
   // save dataset variable names here
   $scope.varNames = []
@@ -84,6 +114,18 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
       types.push({header, type})
     }
     return types
+  }
+
+  $scope.compileChart = function(chartType) {
+    const newChart =
+    `<fusioncharts id="chart",
+    width="600"
+    height="400"
+    type="pie2d"
+    datasource="{{chartSource}}"
+    ></fusioncharts>`
+
+    $('.chart-container').append($compile(newChart)($scope))
   }
 
 })
