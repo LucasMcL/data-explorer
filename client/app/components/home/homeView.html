@@ -1,13 +1,62 @@
 <div class="container">
 	<h1 class="text-center">Home view</h1>
 
-	<!-- Styled button triggers regular html file input -->
+	<!-- Styled button later triggers this button -->
 	<input type="file" name="file-input" accept=".csv" style="display: none;" id="file-input">
-	<input type="button" value="Import" onclick="$('#file-input').click()" class="btn btn-primary btn-lg center-block">
 
+	<!-- import data -->
+	<!-- chart and variable selection -->
+	<form class="form-horizontal">
+	  <div class="form-group">
+	  	<div class="col-sm-2">
+		  	<!-- trigger html5 button above -->
+		  	<input type="button" value="Import Data" onclick="$('#file-input').click()" class="btn btn-primary btn-lg">
+	  	</div>
+	    <label for="chart-type" class="col-sm-1 control-label">Chart</label>
+	    <div class="col-sm-3">
+				<select ng-model="chartType" ng-change="sayHello(chartType)" id="chart-type" class="form-control">
+					<option value="bar2d">Column chart</option>
+					<option value="line">Line chart</option>
+				</select>
+	    </div>
+	    <label for="x-var" class="col-sm-1 control-label">X</label>
+	    <div class="col-sm-2">
+				<select ng-model="xVar" ng-change="sayHello(xVar)" id="x-var" class="form-control" ng-options="var for var in vars">
+				</select>
+	    </div>
+	    <label for="y-var" class="col-sm-1 control-label">Y</label>
+	    <div class="col-sm-2">
+				<select ng-model="yVar" ng-change="sayHello(yVar)" id="y-var" class="form-control" ng-options="var for var in vars">
+				</select>
+	    </div>
+	  </div>
+	</form>
+
+	<!-- grid -->
 	<div ui-grid="grid"
 			 class="myGrid center-block"
 			 ui-grid-auto-resize
 			 ui-grid-resize-columns
 			 ui-grid-move-columns></div>
+
+	<!-- chart -->
+	<div></div>
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

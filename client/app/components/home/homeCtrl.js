@@ -10,6 +10,9 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
     enableHorizontalScrollbar: 2
   }
 
+  // save dataset variables here
+  $scope.vars = []
+
   // Read CSV file, convert to array of objects and attach to scope
   // Attach column names to columnDefs
   // If first var is blank, replace with var name "row"
@@ -27,16 +30,20 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
       const parsedData = $.csv.toObjects(csvData)
       const convertedData = convertData(parsedData)
       $scope.grid.data = convertedData
-      console.log(convertedData)
-      $scope.grid.columnDefs = []
+      $scope.grid.columnDefs = []; $scope.vars = []
       for(header in convertedData[0]) {
         $scope.grid.columnDefs.push({field: header, minWidth: 100})
+        $scope.vars.push(header)
       }
       $scope.$apply()
     }
     reader.onerror = function() {
       console.log('error reading file')
     }
+  }
+
+  $scope.sayHello = function(chartType) {
+    console.log('hello, ' + chartType)
   }
 
   /**
@@ -91,50 +98,3 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-  // const stringData = JSON.stringify(dataAsObjects)
-  // $.ajax({
-  //   type: "POST",
-  //   url: 'http://localhost:5555/files',
-  //   data: reqBody,
-  //   success: () => console.log('success')
-  // });
-
-  // let reqBody = {
-  //   name: file.name,
-  //   size: file.size,
-  //   type: file.type,
-  //   file: csvData
-  // }
-
-  // $scope.grid = {
-  //   data: [
-  //     {
-  //         "firstName": "Cox",
-  //         "lastName": "Carney",
-  //         "company": "Enormo",
-  //         "employed": true
-  //     },
-  //     {
-  //         "firstName": "Lorraine",
-  //         "lastName": "Wise",
-  //         "company": "Comveyer",
-  //         "employed": false
-  //     },
-  //     {
-  //         "firstName": "Nancy",
-  //         "lastName": "Waters",
-  //         "company": "Fuelton",
-  //         "employed": false
-  //     }
-  //   ]
-  // }
