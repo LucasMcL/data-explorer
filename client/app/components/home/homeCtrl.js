@@ -8,9 +8,6 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
     columnDefs: [],
     data: [],
     enableHorizontalScrollbar: 2
-    // onRegisterApi: function(gridApi) {
-    //   $scope.gridApi = gridApi
-    // }
   }
 
   // Read CSV file, convert to array of objects and attach to scope
@@ -25,21 +22,62 @@ app.controller('HomeCtrl', function($scope, uiGridConstants) {
     reader.onload = function(event) {
       let csvData = event.target.result
       if(csvData.slice(0, 3) === `"",`) {
-        csvData = `"row",` + csvData.slice(3)
+        csvData = `"id",` + csvData.slice(3)
       }
       const parsedData = $.csv.toObjects(csvData)
-      $scope.grid.data = parsedData
-      const varNames = Object.keys(parsedData[0])
+      const convertedData = convertData(parsedData)
+      $scope.grid.data = convertedData
+      console.log(convertedData)
       $scope.grid.columnDefs = []
-      varNames.forEach(name => $scope.grid.columnDefs.push({field: name, minWidth: 100}))
+      for(header in convertedData[0]) {
+        $scope.grid.columnDefs.push({field: header, minWidth: 100})
+      }
       $scope.$apply()
-      // $scope.gridApi.core.notifyDataChange( uiGridConstants.dataChange.ALL )
     }
     reader.onerror = function() {
       console.log('error reading file')
     }
   }
 
+  /**
+   * takes data in string format and attempts to
+   * convert numbers and booleans to their appropriate values
+   * @param  {Array} rows - Array of objects of strings
+   * @return {Array} - Array of objects of mixed
+   */
+  function convertData(rows) {
+    let types = determineVarTypes(rows[0])
+    for(let i = 0; i < rows.length; i++) {
+      for(let j = 0; j < types.length; j++) {
+        let typeObj = types[j]
+        let header = typeObj.header; let type = typeObj.type
+        if(type === 'number') rows[i][header] = Number(rows[i][header])
+        if(type.type === 'boolean') {
+          if (rows[i][header] === "true") rows[i][header] = true
+          if (rows[i][header] === "false") rows[i][header] = false
+        }
+      }
+    }
+    return rows
+  }
+
+  /**
+   * given row of dataset as strings, determine
+   * if any data are actually numbers or booleans
+   * @param  {Object} row - first row of dataset as object of strings
+   * @return {Array} - array of objects [header: <header>, type: 'string' | 'boolean' | 'number']
+   */
+  function determineVarTypes(row) {
+    let types = []
+    for(header in row) {
+      type = 'string'
+      const datum = row[header]
+      if(datum === "true" || datum === "false") type = 'boolean'
+      if(!isNaN(datum)) type = 'number'
+      types.push({header, type})
+    }
+    return types
+  }
 
 })
 
