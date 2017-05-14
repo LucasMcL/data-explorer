@@ -1,6 +1,5 @@
-// TODO enable filtering
-// On load, apply > < and = filtering to number cols
-// Add regular filtering to string cols
+// TODO: remove varNames array
+// Update input options with columnDefs.field
 
 app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants) {
   console.log('Home control instantiated')
@@ -25,9 +24,6 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     chart: {},
     data: []
   }
-
-  // save dataset variable names here
-  $scope.varNames = []
 
   // save selected chartType here
   $scope.chartType
@@ -98,7 +94,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   }
 
   function assignColumnDefs(row) {
-    $scope.grid.columnDefs = []; $scope.varNames = []
+    $scope.grid.columnDefs = []
     for(header in row) {
       let columnDef = {}
 
@@ -123,7 +119,6 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       }
 
       $scope.grid.columnDefs.push(columnDef)
-      $scope.varNames.push(header)
     } // end for in loop
   }
 

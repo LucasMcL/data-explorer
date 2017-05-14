@@ -22,12 +22,12 @@
 	    </div>
 	    <label for="labels" class="col-sm-1 control-label">Labels</label>
 	    <div class="col-sm-2">
-				<select ng-model="labels" ng-change="updateLabels(labels)" id="labels" class="form-control" ng-options="var for var in varNames">
+				<select ng-model="labels" ng-change="updateLabels(labels)" id="labels" class="form-control" ng-options="var.field for var in grid.columnDefs">
 				</select>
 	    </div>
 	    <label for="values" class="col-sm-1 control-label">Values</label>
 	    <div class="col-sm-2">
-				<select ng-model="values" ng-change="updateValues(values)" id="values" class="form-control" ng-options="var for var in varNames">
+				<select ng-model="values" ng-change="updateValues(values)" id="values" class="form-control" ng-options="var.field for var in grid.columnDefs">
 				</select>
 	    </div>
 	  </div>
