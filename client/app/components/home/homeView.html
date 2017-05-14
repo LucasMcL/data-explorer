@@ -20,18 +20,18 @@
 					<option value="pie2d">Pie chart</option>
 				</select>
 	    </div>
-	    <label for="labels" class="col-sm-1 control-label">X (Labels)</label>
+	    <label for="xVar" class="col-sm-1 control-label">X (Labels)</label>
 	    <div class="col-sm-2">
-				<select ng-model="labels" ng-change="updateLabels(labels)" id="labels" class="form-control" ng-options="var.field for var in grid.columnDefs">
+				<select ng-model="xVar" id="xVar" class="form-control" ng-options="var.field for var in grid.columnDefs">
 				</select>
 	    </div>
-	    <label for="values" class="col-sm-1 control-label">Y (Values)</label>
+	    <label for="yVar" class="col-sm-1 control-label">Y (Values)</label>
 	    <div class="col-sm-2">
-				<select ng-model="values" ng-change="updateValues(values)" id="values" class="form-control" ng-options="var.field for var in grid.columnDefs">
+				<select ng-model="yVar" id="yVar" class="form-control" ng-options="var.field for var in grid.columnDefs">
 				</select>
 	    </div>
 	    <div class="col-sm-2">
-	    	<button class="btn btn-lg btn-success pull-right">Create Plot</button>
+	    	<button class="btn btn-lg btn-success pull-right" ng-click="createPlot()">Create Plot</button>
 	    </div>
 	  </div>
 	</form>
@@ -44,7 +44,7 @@
 			 ui-grid-move-columns></div>
 
 	<!-- chart -->
-	<div ng-switch="chartType">
+	<div ng-switch="chartTypeShow">
 		<div id="chart",
 	    fusioncharts
 	    ng-switch-when="column2d"

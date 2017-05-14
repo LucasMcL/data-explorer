@@ -1,5 +1,6 @@
-// TODO: remove varNames array
-// Update input options with columnDefs.field
+//TODO:
+// finish createPlot function
+// update chartTypeShow variable in the createPlot function
 
 app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants) {
   console.log('Home control instantiated')
@@ -27,6 +28,9 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
 
   // save selected chartType here
   $scope.chartType
+
+  // The graph to be shown when the user clicks create plot
+  $scope.chartTypeShow
 
   // Read CSV file, convert to array of objects and attach to scope
   // Attach column names to columnDefs
@@ -126,24 +130,46 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     $scope.chartType = chartType
   }
 
-  // TODO: check for if labels exist or not
-  $scope.updateLabels = function(labels) {
-    if(!labels) return
-    const allData = $scope.grid.data
-    if($scope.chartSource.data.length === 0) {
-      allData.forEach(datum => $scope.chartSource.data.push({label: String(datum[labels])}))
-    }
-    console.log($scope.chartSource.data)
+  $scope.createPlot = function() {
+    console.log('create plot')
+    console.log('$scope.chartType', $scope.chartType)
+    console.log('$scope.xVar', $scope.xVar)
+    console.log('$scope.yVar', $scope.yVar)
+
+    let chartType = $scope.chartType,
+        xVar = $scope.xVar,
+        yVar = $scope.yVar
+
+    if (!chartType) return alert('Please select chart type')
+    if (!xVar) return alert('Please select X (labels) variable')
+    if (!yVar) return alert('Please select Y (values) variable')
+
+    console.log($scope.gridApi.core.getVisibleRows())
+    // Get currently visible rows
+    // Loop through and attach data to chartSource.data
+    // Show appropriate graph
   }
 
-  $scope.updateValues = function(values) {
-    if(!values) return
-    const allData = $scope.grid.data
+  // This code is from when I was updating the plot on select
+  // input change
 
-    allData.forEach((datum, i) => {
-      $scope.chartSource.data[i].value = datum[values]
-    })
-  }
+  // $scope.updateLabels = function(labels) {
+  //   if(!labels) return
+  //   const allData = $scope.grid.data
+  //   if($scope.chartSource.data.length === 0) {
+  //     allData.forEach(datum => $scope.chartSource.data.push({label: String(datum[labels])}))
+  //   }
+  //   console.log($scope.chartSource.data)
+  // }
+
+  // $scope.updateValues = function(values) {
+  //   if(!values) return
+  //   const allData = $scope.grid.data
+
+  //   allData.forEach((datum, i) => {
+  //     $scope.chartSource.data[i].value = datum[values]
+  //   })
+  // }
 
   $scope.logVisibleRows = function() {
     console.log($scope.gridApi.core.getVisibleRows())
