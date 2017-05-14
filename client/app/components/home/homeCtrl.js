@@ -103,10 +103,10 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
           field: header,
           minWidth: 100,
           filters: [{
-              condition: uiGridConstants.filter.GREATER_THAN,
+              condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
               placeholder: '>='
             },{
-              condition: uiGridConstants.filter.LESS_THAN,
+              condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
               placeholder: '<='
             }
           ]

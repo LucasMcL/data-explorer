@@ -8,27 +8,30 @@
 	<!-- chart and variable selection -->
 	<form class="form-horizontal">
 	  <div class="form-group">
-	  	<div class="col-sm-2">
+	  	<div class="col-sm-1">
 		  	<!-- trigger html5 button above -->
-		  	<input type="button" value="Import Data" onclick="$('#file-input').click()" class="btn btn-primary btn-lg">
+		  	<input type="button" value="Import" onclick="$('#file-input').click()" class="btn btn-primary btn-lg">
 	  	</div>
 	    <label for="chart-type" class="col-sm-1 control-label">Chart</label>
-	    <div class="col-sm-3">
+	    <div class="col-sm-2">
 				<select ng-model="chartType" ng-change="updateChart(chartType)" id="chart-type" class="form-control">
 					<option value="column2d">Column chart</option>
 					<option value="line">Line chart</option>
 					<option value="pie2d">Pie chart</option>
 				</select>
 	    </div>
-	    <label for="labels" class="col-sm-1 control-label">Labels</label>
+	    <label for="labels" class="col-sm-1 control-label">X (Labels)</label>
 	    <div class="col-sm-2">
 				<select ng-model="labels" ng-change="updateLabels(labels)" id="labels" class="form-control" ng-options="var.field for var in grid.columnDefs">
 				</select>
 	    </div>
-	    <label for="values" class="col-sm-1 control-label">Values</label>
+	    <label for="values" class="col-sm-1 control-label">Y (Values)</label>
 	    <div class="col-sm-2">
 				<select ng-model="values" ng-change="updateValues(values)" id="values" class="form-control" ng-options="var.field for var in grid.columnDefs">
 				</select>
+	    </div>
+	    <div class="col-sm-2">
+	    	<button class="btn btn-lg btn-success pull-right">Create Plot</button>
 	    </div>
 	  </div>
 	</form>
