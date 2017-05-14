@@ -1,3 +1,7 @@
+// TODO enable filtering
+// On load, apply > < and = filtering to number cols
+// Add regular filtering to string cols
+
 app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants) {
   console.log('Home control instantiated')
 
@@ -8,7 +12,12 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   $scope.grid = {
     columnDefs: [],
     data: [],
-    enableHorizontalScrollbar: 2 // will be enabled when needed
+    enableHorizontalScrollbar: 2, // will be enabled when needed
+    enableFiltering: true,
+
+    onRegisterApi: function(gridApi){
+      $scope.gridApi = gridApi;
+    },
   }
 
   // chart data and options
@@ -40,16 +49,30 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       const parsedData = $.csv.toObjects(csvData)
       const convertedData = convertData(parsedData)
       $scope.grid.data = convertedData
-      $scope.grid.columnDefs = []; $scope.varNames = []
-      for(header in convertedData[0]) {
-        $scope.grid.columnDefs.push({field: header, minWidth: 100})
-        $scope.varNames.push(header)
-      }
+      assignColumnDefs(convertedData[0])
       $scope.$apply()
-    }
+    } // end onLoad
     reader.onerror = function() {
       console.log('error reading file')
     }
+  }
+
+  /**
+   * given row of dataset as strings, determine
+   * if any data are actually numbers or booleans
+   * @param  {Object} row - first row of dataset as object of strings
+   * @return {Array} - array of objects [header: <header>, type: 'string' | 'boolean' | 'number']
+   */
+  function determineVarTypes(row) {
+    let types = []
+    for(header in row) {
+      type = 'string'
+      const datum = row[header]
+      if(datum === "true" || datum === "false") type = 'boolean'
+      if(!isNaN(datum)) type = 'number'
+      types.push({header, type})
+    }
+    return types
   }
 
   /**
@@ -74,22 +97,34 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     return rows
   }
 
-  /**
-   * given row of dataset as strings, determine
-   * if any data are actually numbers or booleans
-   * @param  {Object} row - first row of dataset as object of strings
-   * @return {Array} - array of objects [header: <header>, type: 'string' | 'boolean' | 'number']
-   */
-  function determineVarTypes(row) {
-    let types = []
+  function assignColumnDefs(row) {
+    $scope.grid.columnDefs = []; $scope.varNames = []
     for(header in row) {
-      type = 'string'
-      const datum = row[header]
-      if(datum === "true" || datum === "false") type = 'boolean'
-      if(!isNaN(datum)) type = 'number'
-      types.push({header, type})
-    }
-    return types
+      let columnDef = {}
+
+      if(typeof row[header] === "number") {
+        columnDef = {
+          field: header,
+          minWidth: 100,
+          filters: [{
+              condition: uiGridConstants.filter.GREATER_THAN,
+              placeholder: '>='
+            },{
+              condition: uiGridConstants.filter.LESS_THAN,
+              placeholder: '<='
+            }
+          ]
+        }
+      } else if(typeof row[header] === "string") {
+        columnDef = {
+          field: header,
+          minWidth: 100
+        }
+      }
+
+      $scope.grid.columnDefs.push(columnDef)
+      $scope.varNames.push(header)
+    } // end for in loop
   }
 
   $scope.updateChart = function(chartType) {
@@ -113,6 +148,10 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     allData.forEach((datum, i) => {
       $scope.chartSource.data[i].value = datum[values]
     })
+  }
+
+  $scope.logVisibleRows = function() {
+    console.log($scope.gridApi.core.getVisibleRows())
   }
 
 })
