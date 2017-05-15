@@ -86,7 +86,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       const parsedData = $.csv.toObjects(csvData)
       const convertedData = HomeFact.convertData(parsedData)
       $scope.grid.data = convertedData
-      assignColumnDefs(convertedData[0])
+      $scope.grid.columnDefs = HomeFact.generateColumnDefs(convertedData[0])
       $scope.$apply()
     } // end onLoad
     reader.onerror = function() {

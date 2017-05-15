@@ -1,4 +1,4 @@
-app.factory('HomeFact', function() {
+app.factory('HomeFact', function(uiGridConstants) {
 	console.log('home factory instantiated')
 
 	 /**
@@ -41,5 +41,36 @@ app.factory('HomeFact', function() {
     return rows
   }
 
-	return { convertData }
+  function generateColumnDefs(row) {
+    let columnDefs = []
+    for(header in row) {
+      let columnDef = {}
+
+      if(typeof row[header] === "number") {
+        columnDef = {
+          field: header,
+          minWidth: 100,
+          filters: [{
+              condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+              placeholder: '>='
+            },{
+              condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+              placeholder: '<='
+            }
+          ]
+        }
+      } else if(typeof row[header] === "string") {
+        columnDef = {
+          field: header,
+          minWidth: 100
+        }
+      }
+
+      columnDefs.push(columnDef)
+    } // end for in loop
+    return columnDefs
+  }
+
+
+	return { convertData, generateColumnDefs }
 })
