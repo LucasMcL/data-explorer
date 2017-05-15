@@ -132,49 +132,27 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
 
   $scope.createPlot = function() {
     console.log('create plot')
-    console.log('$scope.chartType', $scope.chartType)
-    console.log('$scope.xVar', $scope.xVar)
-    console.log('$scope.yVar', $scope.yVar)
 
     let chartType = $scope.chartType,
-        xVar = $scope.xVar,
-        yVar = $scope.yVar
+        xVar = $scope.xVar.field,
+        yVar = $scope.yVar.field
 
     if (!chartType) return alert('Please select chart type')
     if (!xVar) return alert('Please select X (labels) variable')
     if (!yVar) return alert('Please select Y (values) variable')
 
-    console.log($scope.gridApi.core.getVisibleRows())
-    // Get currently visible rows
-    // Loop through and attach data to chartSource.data
-    // Show appropriate graph
+    $scope.chartSource.data = []
+    $scope.gridApi.core.getVisibleRows().forEach(rowInfo => {
+      row = rowInfo.entity
+      let datum = {}
+      datum.label = row[xVar]
+      datum.value = row[yVar]
+      $scope.chartSource.data.push(datum)
+    })
+    console.log($scope.chartSource.data)
+
+    $scope.chartTypeShow = $scope.chartType
   }
-
-  // This code is from when I was updating the plot on select
-  // input change
-
-  // $scope.updateLabels = function(labels) {
-  //   if(!labels) return
-  //   const allData = $scope.grid.data
-  //   if($scope.chartSource.data.length === 0) {
-  //     allData.forEach(datum => $scope.chartSource.data.push({label: String(datum[labels])}))
-  //   }
-  //   console.log($scope.chartSource.data)
-  // }
-
-  // $scope.updateValues = function(values) {
-  //   if(!values) return
-  //   const allData = $scope.grid.data
-
-  //   allData.forEach((datum, i) => {
-  //     $scope.chartSource.data[i].value = datum[values]
-  //   })
-  // }
-
-  $scope.logVisibleRows = function() {
-    console.log($scope.gridApi.core.getVisibleRows())
-  }
-
 })
 
 
