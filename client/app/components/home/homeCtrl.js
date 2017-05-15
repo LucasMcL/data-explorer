@@ -1,12 +1,7 @@
-//TODO:
-//  Figure out how to save dataset and chart
-//  Save entire $scope.grid object and $scope.chartSource object
-
 // Step 1: save dataset
 // Step 2: Login logic on front end
 //           isAuthenticated()
 //           Modal
-
 
 //  User clicks on "Save dataset"
 //    Checks to see if logged in (with cookie?)
@@ -15,19 +10,7 @@
 //        Need to make sure we don't lose current state of workspace after navigating away and back
 //      User can then click "Save dataset" again
 //    If already logged in, simply makes post to database and doesn't change veiws
-//
-//  [OPTIONAL]
-//  User clicks on "Save graph"
-//    Checks to see if logged in (with cookie?)
-//      Redirects to login page if not
-//      Redirects back to home after login
-//        Need to make sure we don't lose current state of workspace after navigating away and back
-//      User can then click "Save graph" again
-//    If already logged in, simply makes post to database and doesn't change views
-//
-//
-
-app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants, HomeFact) {
+app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants, HomeFact, HttpFact) {
   console.log('Home control instantiated')
 
   // grid data and options
@@ -152,6 +135,12 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       },
       data: []
     }
+  }
+
+  $scope.saveDataset = function() {
+    if($scope.grid.data.length === 0) return alert('No data to save')
+
+    HttpFact.sayHello()
   }
 })
 
