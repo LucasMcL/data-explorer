@@ -5,3 +5,9 @@
 	overflow: scroll;
 }
 
+.chartContainer {
+	width: 700px;
+	max-height: 700px;
+	margin-bottom: 300px;
+}
+

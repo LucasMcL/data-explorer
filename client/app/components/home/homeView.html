@@ -45,36 +45,36 @@
 			 ui-grid-move-columns></div>
 
 	<!-- chart -->
-	<div ng-switch="chartTypeShow">
+	<div ng-switch="chartTypeShow" class="chartContainer center-block">
 		<div id="chart",
 	    fusioncharts
 	    ng-switch-when="column2d"
-	    width="600"
-	    height="400"
+	    width="700"
+	    height="700"
 	    type="column2d"
 	    datasource="{{chartSource}}"
     ></div>
 		<div id="chart",
 	    fusioncharts
 	    ng-switch-when="line"
-	    width="600"
-	    height="400"
+	    width="700"
+	    height="700"
 	    type="line"
 	    datasource="{{chartSource}}"
     ></div>
 		<div id="chart",
 	    fusioncharts
 	    ng-switch-when="pie2d"
-	    width="600"
-	    height="400"
+	    width="700"
+	    height="700"
 	    type="pie2d"
 	    datasource="{{chartSource}}"
     ></div>
 		<div id="chart",
 	    fusioncharts
 	    ng-switch-when="scatter"
-	    width="600"
-	    height="400"
+	    width="700"
+	    height="700"
 	    type="scatter"
 	    datasource="{{chartSource}}"
     ></div>
