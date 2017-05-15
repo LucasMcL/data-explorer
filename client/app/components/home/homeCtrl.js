@@ -27,8 +27,10 @@
 //
 //
 
-app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants) {
+app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants, HomeFact) {
   console.log('Home control instantiated')
+
+  HomeFact.sayHello()
 
   // grid data and options
   $scope.grid = {
@@ -53,7 +55,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   $scope.chartType; $scope.chartTypeShow // The graph to show when user clicks plot
 
   // Read file on file input event
-  $('#file-input').change(import)
+  $('#file-input').change(importData)
 
   // Modal activation / closing
   $('.trigger-login').click(showLoginModal)
@@ -73,8 +75,8 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   // Attach column names to columnDefs
   // If first var is blank, replace with var name "row"
   // Scope refresh and ui grid refresh
-  function import(evt) {
-    console.log('import')
+  function importData(evt) {
+    console.log('upload')
     let file = evt.target.files[0]
     let reader = new FileReader()
     reader.readAsText(file)
