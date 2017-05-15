@@ -2,8 +2,7 @@
 //  Figure out how to save dataset and chart
 //  Save entire $scope.grid object and $scope.chartSource object
 
-// Step 0: make navbar and collection view
-// Step 1: save dataset and graph for superuser
+// Step 1: save dataset
 // Step 2: Login logic on front end
 //           isAuthenticated()
 //           Modal
@@ -31,9 +30,6 @@
 app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants) {
   console.log('Home control instantiated')
 
-  // Read file on file input event
-  $('#file-input').change(upload)
-
   // grid data and options
   $scope.grid = {
     columnDefs: [],
@@ -54,18 +50,31 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     data: []
   }
 
-  // save selected chartType here
-  $scope.chartType
+  $scope.chartType; $scope.chartTypeShow // The graph to show when user clicks plot
 
-  // The graph to be shown when the user clicks create plot
-  $scope.chartTypeShow
+  // Read file on file input event
+  $('#file-input').change(import)
+
+  // Modal activation / closing
+  $('.trigger-login').click(showLoginModal)
+  $('.trigger-register').click(showRegisterModal)
+
+  function showLoginModal(evt) {
+    $('#register-modal').modal('hide')
+    $('#login-modal').modal()
+  }
+  function showRegisterModal(evt) {
+    $('#login-modal').modal('hide')
+    $('#register-modal').modal()
+  }
+
 
   // Read CSV file, convert to array of objects and attach to scope
   // Attach column names to columnDefs
   // If first var is blank, replace with var name "row"
   // Scope refresh and ui grid refresh
-  function upload(evt) {
-    console.log('upload')
+  function import(evt) {
+    console.log('import')
     let file = evt.target.files[0]
     let reader = new FileReader()
     reader.readAsText(file)

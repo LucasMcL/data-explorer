@@ -1,5 +1,32 @@
+<!-- todo: toggle login/register and logout -->
+<!-- todo: hide/show saved based on login? -->
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <img alt="Data Explorer" src="...">
+      </a>
+    </div>
+	  <ul class="nav navbar-nav">
+	    <li class="active"><a href="/">Workspace<span class="sr-only">(current)</span></a></li>
+	    <li><a href="/#/saved">Saved</a></li>
+	  </ul>
+	  <div class="nav navbar-nav navbar-right">
+			<li><a href="" class="trigger-login">Login/Register</a></li>
+			<li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">[Current User]<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="">Logout</a></li>
+        </ul>
+      </li>
+	  </div>
+  </div>
+</nav>
+
 <div class="container">
-	<h1 class="text-center">Home view</h1>
+
+	<h1 class="text-center page-title">Workspace</h1>
 
 	<!-- Styled button later triggers this button -->
 	<input type="file" name="file-input" accept=".csv" style="display: none;" id="file-input">
@@ -84,7 +111,65 @@
 	</div>
 </div>
 
+<!-- Login Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="login-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form">
+        	<div class="form-group">
+        		<label for="login-email">Email</label>
+        		<input type="email" class="form-control", id="login-email" placeholder="example@user.com" required>
+        	</div>
+        	<div class="form-group">
+        		<label for="login-password">Password</label>
+        		<input type="password" class="form-control", id="login-password" placeholder="********" required>
+        	</div>
+        </div>
+        <a href="" class="trigger-register">Don't have an account?</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
+<!-- Register Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="register-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Register</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form">
+        	<div class="form-group">
+        		<label for="register-email">Email</label>
+        		<input type="email" class="form-control", id="register-email" placeholder="example@user.com" required>
+        	</div>
+        	<div class="form-group">
+        		<label for="register-password">Password</label>
+        		<input type="password" class="form-control", id="register-password" placeholder="********" required>
+        	</div>
+        	<div class="form-group">
+        		<label for="register-display-name">Display name</label>
+        		<input type="text" class="form-control", id="register-display-name" placeholder="Jeff" required>
+        	</div>
+        	<a href="" class="trigger-login">Already have an account?</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 

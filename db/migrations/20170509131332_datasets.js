@@ -2,7 +2,8 @@ exports.up = function(knex, Promise) {
 	return knex.schema.createTable('datasets', table => {
 		table.increments()
 		table.text('data', 'longtext').notNullable()
-		table.string('name')
+		table.string('name').notNullable()
+		table.string('description')
 		table.string('file_type')
 		table.string('size')
 
