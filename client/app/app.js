@@ -19,6 +19,7 @@ app.config(($routeProvider, $locationProvider) => {
       controller: 'HomeCtrl',
       templateUrl: '/app/components/home/homeView.html',
     })
+    // TODO: add resolve method for loading saved datasets
     .when('/saved', {
     	controller: 'SavedCtrl',
     	templateUrl: '/app/components/saved/savedView.html'

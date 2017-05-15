@@ -10,7 +10,7 @@
 	  <div class="form-group">
 	  	<div class="col-sm-1">
 		  	<!-- trigger html5 button above -->
-		  	<input type="button" value="Import" onclick="$('#file-input').click()" class="btn btn-primary btn-lg">
+		  	<input type="button" value="Import" onclick="$('#file-input').click()" class="btn btn-info btn-lg">
 	  	</div>
 	    <label for="chart-type" class="col-sm-1 control-label">Chart</label>
 	    <div class="col-sm-2">
@@ -31,8 +31,11 @@
 				<select ng-model="yVar" id="yVar" class="form-control" ng-options="var.field for var in grid.columnDefs">
 				</select>
 	    </div>
-	    <div class="col-sm-2">
-	    	<button class="btn btn-lg btn-success pull-right" ng-click="createPlot()">Create Plot</button>
+	    <div class="col-sm-1">
+	    	<button class="btn btn-lg btn-primary" ng-click="createPlot()">Plot</button>
+	    </div>
+	    <div class="col-sm-1">
+	    	<button class="btn btn-lg btn-success pull-right" ng-click="saveDataset()">Save</button>
 	    </div>
 	  </div>
 	</form>
