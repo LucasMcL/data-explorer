@@ -1,6 +1,5 @@
 //TODO:
-// finish createPlot function
-// update chartTypeShow variable in the createPlot function
+//  resetChart function
 
 app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants) {
   console.log('Home control instantiated')
@@ -141,6 +140,11 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     if (!xVar) return alert('Please select X (labels) variable')
     if (!yVar) return alert('Please select Y (values) variable')
 
+    if(chartType === "scatter") return createScatterplot(chartType, xVar, yVar)
+    else createLabelValueChart(chartType, xVar, yVar)
+  }
+
+  function createLabelValueChart(chartType, xVar, yVar) {
     $scope.chartSource.data = []
     $scope.gridApi.core.getVisibleRows().forEach(rowInfo => {
       row = rowInfo.entity
@@ -149,9 +153,31 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       datum.value = row[yVar]
       $scope.chartSource.data.push(datum)
     })
-    console.log($scope.chartSource.data)
 
     $scope.chartTypeShow = $scope.chartType
+  }
+
+  function createScatterplot(chartType, xVar, yVar) {
+    $scope.chartSource.data = []
+    $scope.chartSource.dataset = [{showRegressionLine: 1, data: []}]
+    $scope.chartSource.chart.xAxisName = xVar
+    $scope.chartSource.chart.yAxisName = yVar
+    $scope.gridApi.core.getVisibleRows().forEach(rowInfo => {
+      row = rowInfo.entity
+      let datum = {}
+      datum.x = row[xVar]
+      datum.y = row[yVar]
+      $scope.chartSource.dataset[0].data.push(datum)
+    })
+    console.log($scope.chartSource)
+
+    $scope.chartTypeShow = $scope.chartType
+  }
+
+
+  function resetChart() {
+    // $scope.chartSource.data = []
+    // $scope.chartSource
   }
 })
 

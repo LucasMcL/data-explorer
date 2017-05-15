@@ -18,6 +18,7 @@
 					<option value="column2d">Column chart</option>
 					<option value="line">Line chart</option>
 					<option value="pie2d">Pie chart</option>
+					<option value="scatter">Scatter chart</option>
 				</select>
 	    </div>
 	    <label for="xVar" class="col-sm-1 control-label">X (Labels)</label>
@@ -69,7 +70,14 @@
 	    type="pie2d"
 	    datasource="{{chartSource}}"
     ></div>
-		<div ng-switch-default>Please select a chart type</div>
+		<div id="chart",
+	    fusioncharts
+	    ng-switch-when="scatter"
+	    width="600"
+	    height="400"
+	    type="scatter"
+	    datasource="{{chartSource}}"
+    ></div>
 	</div>
 </div>
 
