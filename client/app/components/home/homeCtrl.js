@@ -1,3 +1,5 @@
+// Todo: user inputs name and description of dataset when save is clicked
+
 // Step 1: save dataset
 // Step 2: Login logic on front end
 //           isAuthenticated()
@@ -137,10 +139,31 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     }
   }
 
-  $scope.saveDataset = function() {
+  $scope.triggerSaveModal = function() {
     if($scope.grid.data.length === 0) return alert('No data to save')
+    $('#add-dataset-modal').modal()
+  }
 
-    HttpFact.sayHello()
+  $scope.saveDataset = function() {
+    $('#add-dataset-modal').modal('hide')
+
+    const name = $('#save-dataset-name').val(); $('#save-dataset-name').val('')
+    const description = $('#save-dataset-description').val(); $('#save-dataset-description').val('')
+
+    let postBody = {
+      name: name,
+      description: description,
+      user_id: 1,
+      data: JSON.stringify($scope.grid.data)
+    }
+
+    HttpFact.addDataset(postBody)
+      .then(response => console.log(response.data.id))
+      .catch(response => {
+        if(response.status === 413) return alert('Sorry, that file is too big')
+        else if(response.status !== 200) return alert('There was an error processing your request.  Please try again later')
+        else return alert('Successfully saved')
+      })
   }
 })
 

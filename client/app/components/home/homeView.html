@@ -62,7 +62,7 @@
 	    	<button class="btn btn-lg btn-primary" ng-click="createPlot()">Plot</button>
 	    </div>
 	    <div class="col-sm-1">
-	    	<button class="btn btn-lg btn-success pull-right" ng-click="saveDataset()" id="save-dataset-btn">Save</button>
+	    	<button class="btn btn-lg btn-success pull-right" ng-click="triggerSaveModal()" id="save-dataset-btn">Save</button>
 	    </div>
 	  </div>
 	</form>
@@ -166,6 +166,34 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Add Dataset Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="add-dataset-modal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center">Dataset</h4>
+      </div>
+      <div class="modal-body">
+      	<p>What would you like this dataset to be saved as?</p>
+        <div class="form">
+        	<div class="form-group">
+        		<label for="save-dataset-name">Name</label>
+        		<input type="text" class="form-control", id="save-dataset-name" placeholder="Cars daset" required>
+        	</div>
+        	<div class="form-group">
+        		<label for="save-dataset-description">Description</label>
+        		<textarea class="form-control", id="save-dataset-description" placeholder="Data from motortrend magazine survey 1985"></textarea>
+        	</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="saveDataset()">Submit</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

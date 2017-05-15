@@ -49,8 +49,8 @@ module.exports.addDataset = (req, res, next) => {
 	// console.log('dataset', dataset)
 
 	Dataset.forge(dataset).save({}, {require: true})
-		.then(model => res.status(200).json({id: model.get('id')}))
-		.catch(error => next(error))
+		.then(model => {res.status(200).json({id: model.get('id')})})
+		.catch(error => {next(error)})
 }
 
 

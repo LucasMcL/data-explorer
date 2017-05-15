@@ -1,9 +1,13 @@
 'use strict'
 
+// TODO:
+// 	 Change cors config to have whitelist for client url
+
 // Require packages
 const express = require('express')
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 // Require routes, gathered in index.js file
 const routes = require('./routes/')
@@ -16,17 +20,19 @@ dotenv.config()
 let PORT = process.env.PORT || 8000
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(cors())
 
 
 // API routes
 app.use('/api/', routes)
 
 app.use((err,req,res,next) => {
-  console.log("error", err)
+  console.log("error catcher: ", err)
+  res.header('Access-Control-Allow-Origin', '*')
   res.status(err.status || 500)
   res.json({
     message: err.message,
-    error: {}
+    error: err
   })
 })
 
