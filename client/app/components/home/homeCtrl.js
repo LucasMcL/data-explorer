@@ -156,6 +156,8 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       datum.value = row[yVar]
       $scope.chartSource.data.push(datum)
     })
+    $scope.chartSource.chart.xAxisName = xVar
+    $scope.chartSource.chart.yAxisName = yVar
 
     $scope.chartTypeShow = $scope.chartType
   }
