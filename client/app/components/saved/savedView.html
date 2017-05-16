@@ -49,38 +49,11 @@
     <div ng-repeat="dataset in trimmedDatasets">
       <div class="col-sm-4">
         <h4 class="text-center">{{dataset.name}}</h4>
-        <div ui-grid="dataset.data"></div>
+        <div ui-grid="dataset.grid"></div>
       </div>
     </div>
   </div>
 </div>
-
-<table>
-  <thead>
-    <tr>
-      <th>A</th>
-      <th>mpg</th>
-      <th>hp</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Mazda RX4</td>
-      <td>21</td>
-      <td>110</td>
-    </tr>
-    <tr>
-      <td>Mazda RX4 Wag</td>
-      <td>21</td>
-      <td>110</td>
-    </tr>
-    <tr>
-      <td>Datsun 710</td>
-      <td>22.8</td>
-      <td>93</td>
-    </tr>
-  </tbody>
-</table>
 
 
 
