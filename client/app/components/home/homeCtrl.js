@@ -154,7 +154,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       name: name,
       description: description,
       user_id: 1,
-      data: JSON.stringify($scope.grid.data)
+      data: angular.toJson($scope.grid.data)
     }
 
     HttpFact.addDataset(postBody)
