@@ -3,7 +3,7 @@ app.factory('HttpFact', function($http) {
 
 	function getAllDatasets() {
 		return $http.get('http://localhost:9000/api/datasets')
-			.then(response => response.data)
+			.then(response => response.data.datasets)
 			.catch(err => err)
 	}
 
