@@ -15,5 +15,9 @@ app.factory('HttpFact', function($http) {
 		return $http.post('http://localhost:9000/api/datasets', postBody)
 	}
 
-	return { getAllDatasets, addDataset }
+	function deleteDataset(id) {
+		return $http.delete(`http://localhost:9000/api/datasets/${id}`)
+	}
+
+	return { getAllDatasets, addDataset, deleteDataset }
 })

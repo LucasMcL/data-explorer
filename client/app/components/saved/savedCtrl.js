@@ -1,4 +1,4 @@
-app.controller('SavedCtrl', function($scope, datasets, uiGridConstants) {
+app.controller('SavedCtrl', function($scope, datasets, uiGridConstants, HttpFact) {
 	console.log('Saved control instantiated')
 
 	let datasetToDelete = null
@@ -33,7 +33,12 @@ app.controller('SavedCtrl', function($scope, datasets, uiGridConstants) {
 	}
 
 	$scope.deleteDataset = function() {
-		console.log(`delete dataset ${datasetToDelete}`)
+		const id = datasetToDelete
+		HttpFact.deleteDataset(datasetToDelete)
+
+		$scope.trimmedDatasets.forEach((ds, i) => {
+			if(ds.id === id) $scope.trimmedDatasets.splice(i, 1)
+		})
 	}
 
 })
