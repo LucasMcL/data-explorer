@@ -1,6 +1,8 @@
 app.controller('SavedCtrl', function($scope, datasets, uiGridConstants) {
 	console.log('Saved control instantiated')
 
+	let datasetToDelete = null
+
 	// Trims datasets to 10 rows with first 3 vars
 	datasets.forEach(dataset => {
 		dataset.grid = {data: dataset.data.slice(0, 10)}
@@ -21,4 +23,30 @@ app.controller('SavedCtrl', function($scope, datasets, uiGridConstants) {
 	$scope.trimmedDatasets = datasets
 	console.log('$scope.trimmedDatasets', $scope.trimmedDatasets)
 
+	$scope.triggerDeleteModal = function(id) {
+		datasetToDelete = id
+		$('#delete-confirm-modal').modal()
+	}
+
+	$scope.cancelDelete = function() {
+		datasetToDelete = null
+	}
+
+	$scope.deleteDataset = function() {
+		console.log(`delete dataset ${datasetToDelete}`)
+	}
+
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
