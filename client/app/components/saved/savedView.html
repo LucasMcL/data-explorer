@@ -27,9 +27,13 @@
 	<h1 class="text-center page-title">Saved</h1>
   <div class="row">
     <div ng-repeat="dataset in trimmedDatasets">
-      <div class="col-sm-4">
-        <h4 class="text-center">{{dataset.name}}</h4>
-        <div ui-grid="dataset.grid"></div>
+      <div class="col-sm-4 grid-container">
+        <h3 class="text-center">{{dataset.name}}</h4>
+          <div class="row btn-container">
+            <button class="col-sm-2 col-sm-offset-8 btn">Load</button>
+            <button class="col-sm-2 btn btn-danger">Delete</button>
+          </div>
+        <div ui-grid="dataset.grid" class="preview-grid"></div>
       </div>
     </div>
   </div>

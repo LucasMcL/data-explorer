@@ -1,8 +1,6 @@
 app.controller('SavedCtrl', function($scope, datasets, uiGridConstants) {
 	console.log('Saved control instantiated')
 
-	$scope.datasets = datasets
-
 	// Trims datasets to 10 rows with first 3 vars
 	datasets.forEach(dataset => {
 		dataset.grid = {data: dataset.data.slice(0, 10)}
