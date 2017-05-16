@@ -81,7 +81,26 @@ describe('Dataset routes', () => {
         })
     })
   })
+
+  describe(`DELETE /api/datasets/{datasetid}`, function() {
+    it(`should delete a dataset from the database`, function() {
+      return chai.request(server)
+        .delete('/api/datasets/1')
+        .then(res => {
+          res.should.have.status(200)
+          res.should.be.json
+          res.should.be.a.object
+        })
+    })
+  })
 })
+
+
+
+
+
+
+
 
 
 

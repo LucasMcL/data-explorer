@@ -53,6 +53,14 @@ module.exports.addDataset = (req, res, next) => {
 		.catch(error => {next(error)})
 }
 
+module.exports.deleteDataset = (req, res, next) => {
+	const datasetid = req.params.datasetid
+
+	Dataset.forge({id: datasetid}).destroy({require: true})
+		.then(model => res.status(200).json({}))
+		.catch(error => next(error))
+}
+
 
 
 
