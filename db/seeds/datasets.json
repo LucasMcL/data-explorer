@@ -3042,5 +3042,39 @@
         "gear": 4,
         "carb": 2
       }
+    ],
+  "inventory": [
+      {
+        "id": 38,
+        "name": "Belvita Cinnamon Brown Sugar",
+        "upc_code": 44000031930,
+        "price": 1.89,
+        "measure": "QTY",
+        "quantity": 24
+      },
+      {
+        "id": 14,
+        "name": "Nature's BakeryFig Bar, Blueberry",
+        "upc_code": 47495112900,
+        "price": 1.29,
+        "measure": "EA",
+        "quantity": 25
+      },
+      {
+        "id": 20,
+        "name": "Women's Inline Skates",
+        "upc_code": 49288359097,
+        "price": 9.99,
+        "measure": "QTY",
+        "quantity": 2
+      },
+      {
+        "id": 19,
+        "name": "Razor High Roller BMX",
+        "upc_code": 16751420400,
+        "price": 102.71,
+        "measure": "QTY",
+        "quantity": 2
+      }
     ]
 }
