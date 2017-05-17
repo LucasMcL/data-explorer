@@ -113,10 +113,11 @@
       <div class="modal-body">
       	<p>What would you like this dataset to be saved as?</p>
         <div class="form">
-        	<div class="form-group">
+        	<form class="form-group" ng-submit="saveDataset()">
         		<label for="save-dataset-name">Name</label>
         		<input type="text" class="form-control", id="save-dataset-name" placeholder="Cars dataset" required>
-        	</div>
+        		<input type="submit" style="display: none;">
+        	</form>
         </div>
       </div>
       <div class="modal-footer">
