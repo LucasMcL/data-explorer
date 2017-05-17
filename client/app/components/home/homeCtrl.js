@@ -1,9 +1,10 @@
-app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants, HomeFact, HttpFact, dataset) {
+app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants, HomeFact, HttpFact, dataset, $route) {
   console.log('Home control instantiated')
 
-  console.log('dataset: ', dataset)
+  console.log('reloading route')
 
-  // grid data and options
+
+  // Initialize grid and chart options
   $scope.grid = {
     columnDefs: [],
     data: [],
@@ -15,7 +16,6 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     },
   }
 
-  // chart data and options
   $scope.chartSource = {
     chart: {
       exportEnabled: 1
@@ -24,6 +24,12 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   }
 
   $scope.chartType; $scope.chartTypeShow // The graph to show when user clicks plot
+
+  if(dataset) {
+    console.log('Here is the dataset: ', dataset)
+    preloadData(dataset)
+  }
+  else console.log('No dataset')
 
   // Read file on file input event
   $('#file-input').change(importData)
@@ -41,6 +47,11 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     $('#register-modal').modal()
   }
 
+  function preloadData(dataset) {
+    console.log('preloading data')
+    $scope.grid.data = dataset.data
+    $scope.grid.columnDefs = HomeFact.generateColumnDefs(dataset.data[0])
+  }
 
   // Read CSV file, convert to array of objects and attach to scope
   // Attach column names to columnDefs
