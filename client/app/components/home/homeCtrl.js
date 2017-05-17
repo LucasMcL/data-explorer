@@ -52,7 +52,8 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
         csvData = `"id",` + csvData.slice(3)
       }
       const parsedData = $.csv.toObjects(csvData)
-      const convertedData = HomeFact.convertData(parsedData)
+      let convertedData = HomeFact.convertData(parsedData)
+      convertedData = HomeFact.renameColumnsWithPeriods(convertedData)
       $scope.grid.data = convertedData
       $scope.grid.columnDefs = HomeFact.generateColumnDefs(convertedData[0])
       $scope.$apply()

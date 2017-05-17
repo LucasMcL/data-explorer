@@ -71,6 +71,32 @@ app.factory('HomeFact', function(uiGridConstants) {
     return columnDefs
   }
 
+  /**
+   * Looks for column names that have a period such as "Infant.Mortality"
+   * Uses regex to convert them to "Infant_Mortality"
+   * @param  {Array} dataset - Array of objects (rows)
+   * @return {Array}         - Arrya of objects
+   */
+  function renameColumnsWithPeriods(dataset) {
+    angular.forEach(dataset, function(row, index){
+      angular.forEach(row, function(element, key){
+        if (key.match('.') !== -1){
+          delete row[key];
+          var newKey = key.replace(/\./, '_');
+          row[newKey] = element;
+        }
+      });
+    });
+    return dataset
+  }
 
-	return { convertData, generateColumnDefs }
+
+	return { convertData, generateColumnDefs, renameColumnsWithPeriods }
 })
+
+
+
+
+
+
+
