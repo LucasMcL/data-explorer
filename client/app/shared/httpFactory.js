@@ -19,5 +19,10 @@ app.factory('HttpFact', function($http) {
 		return $http.delete(`http://localhost:9000/api/datasets/${id}`)
 	}
 
-	return { getAllDatasets, addDataset, deleteDataset }
+	function getDataset(id) {
+		console.log('getDataset')
+		return $http.get(`http://localhost:9000/api/datasets/${id}`)
+	}
+
+	return { getAllDatasets, addDataset, deleteDataset, getDataset }
 })

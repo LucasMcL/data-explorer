@@ -12,9 +12,13 @@
 //        Need to make sure we don't lose current state of workspace after navigating away and back
 //      User can then click "Save dataset" again
 //    If already logged in, simply makes post to database and doesn't change veiws
-app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants, HomeFact, HttpFact) {
+app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants, HomeFact, HttpFact, dataset) {
   console.log('Home control instantiated')
 
+  // console.log(HttpFact.getDataset(1))
+
+
+  console.log('dataset: ', dataset)
   // grid data and options
   $scope.grid = {
     columnDefs: [],
