@@ -1,8 +1,6 @@
 app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants, HomeFact, HttpFact, dataset, $route) {
   console.log('Home control instantiated')
 
-  console.log('reloading route')
-
   // Initialize grid and chart options
   $scope.grid = {
     columnDefs: [],
