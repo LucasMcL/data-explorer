@@ -21,12 +21,17 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   }
 
   $scope.chartType; $scope.chartTypeShow // The graph to show when user clicks plot
+  $scope.title
 
   if(dataset) {
     console.log('Here is the dataset: ', dataset)
     preloadData(dataset)
+    $scope.title = dataset.name
   }
-  else console.log('No dataset')
+  else {
+    $scope.title = 'Workspace'
+    console.log('No dataset')
+  }
 
   // Read file on file input event
   $('#file-input').change(importData)
