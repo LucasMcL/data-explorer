@@ -3,7 +3,6 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
 
   console.log('reloading route')
 
-
   // Initialize grid and chart options
   $scope.grid = {
     columnDefs: [],
