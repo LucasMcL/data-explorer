@@ -1,24 +1,8 @@
-// Todo: user inputs name and description of dataset when save is clicked
-
-// Step 1: save dataset
-// Step 2: Login logic on front end
-//           isAuthenticated()
-//           Modal
-
-//  User clicks on "Save dataset"
-//    Checks to see if logged in (with cookie?)
-//      Redirects to login page if not
-//      Redirects back to home after login
-//        Need to make sure we don't lose current state of workspace after navigating away and back
-//      User can then click "Save dataset" again
-//    If already logged in, simply makes post to database and doesn't change veiws
 app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstants, HomeFact, HttpFact, dataset) {
   console.log('Home control instantiated')
 
-  // console.log(HttpFact.getDataset(1))
-
-
   console.log('dataset: ', dataset)
+
   // grid data and options
   $scope.grid = {
     columnDefs: [],
