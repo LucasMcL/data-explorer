@@ -31,19 +31,6 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   // Read file on file input event
   $('#file-input').change(importData)
 
-  // Modal activation / closing
-  $('.trigger-login').click(showLoginModal)
-  $('.trigger-register').click(showRegisterModal)
-
-  function showLoginModal(evt) {
-    $('#register-modal').modal('hide')
-    $('#login-modal').modal()
-  }
-  function showRegisterModal(evt) {
-    $('#login-modal').modal('hide')
-    $('#register-modal').modal()
-  }
-
   function preloadData(dataset) {
     console.log('preloading data')
     $scope.grid.data = dataset.data
