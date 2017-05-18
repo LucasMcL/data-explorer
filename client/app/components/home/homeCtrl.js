@@ -161,6 +161,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     resetChart()
     $scope.chartSource.chart.caption = `frequency of ${xVar}`
     $scope.chartSource.chart.xAxisName = xVar
+    $scope.chartSource.chart.yAxisName = 'number of instances'
     let data = $scope.gridApi.core.getVisibleRows()
 
     // Find min / max value of xVar
