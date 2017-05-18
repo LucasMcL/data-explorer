@@ -123,6 +123,8 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     resetChart()
     $scope.chartSource.categories = [{category: []}]
     $scope.chartSource.dataset = [{data: []}]
+    $scope.chartSource.chart.xAxisName = String(xVar)
+    $scope.chartSource.chart.yAxisName = String(yVar)
     let data = $scope.gridApi.core.getVisibleRows()
     let arrayOfUniqueXVars = []
     data.forEach(rowInfo => {
@@ -132,7 +134,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     // Create category labels
     arrayOfUniqueXVars.forEach(uniqueVar => {
       $scope.chartSource.categories[0].category.push({
-        label: uniqueVar
+        label: String(uniqueVar)
       })
     })
     // Create strings of values and push to "data" array
@@ -140,6 +142,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       values = ""
       data.forEach((rowInfo, j) => {
         let row = rowInfo.entity
+        if(isNaN(row[yVar])) return
         if(row[xVar] === uniqueVar) values += (String(row[yVar]) + ',')
       })
       $scope.chartSource.dataset[0].data.push({value: values.slice(0, -1)})
