@@ -84,6 +84,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     if (!yVar) return alert('Please select Y (values) variable')
 
     if(chartType === "scatter") return createScatterplot(chartType, xVar, yVar)
+    else if(chartType === "boxandwhisker2d") return createBoxAndWhiskerPlot(chartType, xVar, yVar)
     else return createLabelValueChart(chartType, xVar, yVar)
   }
 
@@ -116,6 +117,35 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     })
 
     $scope.chartTypeShow = $scope.chartType
+  }
+
+  function createBoxAndWhiskerPlot(chartType, xVar, yVar) {
+    resetChart()
+    $scope.chartSource.categories = [{category: []}]
+    $scope.chartSource.dataset = [{data: []}]
+    let data = $scope.gridApi.core.getVisibleRows()
+    let arrayOfUniqueXVars = []
+    data.forEach(rowInfo => {
+      let row = rowInfo.entity
+      if(!arrayOfUniqueXVars.includes(row[xVar])) arrayOfUniqueXVars.push(row[xVar])
+    })
+    // Create category labels
+    arrayOfUniqueXVars.forEach(uniqueVar => {
+      $scope.chartSource.categories[0].category.push({
+        label: uniqueVar
+      })
+    })
+    // Create strings of values and push to "data" array
+    arrayOfUniqueXVars.forEach((uniqueVar, i) => {
+      values = ""
+      data.forEach((rowInfo, j) => {
+        let row = rowInfo.entity
+        if(row[xVar] === uniqueVar) values += (String(row[yVar]) + ',')
+      })
+      $scope.chartSource.dataset[0].data.push({value: values.slice(0, -1)})
+    })
+    console.log($scope.chartSource)
+    $scope.chartTypeShow = chartType
   }
 
   // reset chartSource data, dataset, and chart properties
