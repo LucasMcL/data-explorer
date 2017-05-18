@@ -1,3 +1,49 @@
+/*********************
+ ** Global styles
+ *********************/
+
+body {
+	font-family: 'Khula', sans-serif;
+}
+
+.page-title {
+	text-transform: uppercase;
+}
+
+.btn-red {
+	background-color: #E83733;
+	color: white;
+}
+
+.btn-light-blue {
+	background-color: #6699CC;
+	color: white;
+}
+
+.btn-orange {
+	background-color: #FF8C42;
+	color: white;
+}
+
+.btn-green {
+	background-color: #31A047;
+	color: white;
+}
+
+/*********************
+ ** Workspace styles
+ *********************/
+
+/* Form */
+.form-horizontal {
+	vertical-align: top;
+}
+
+.y-var-label {
+	padding-left: 0;
+}
+
+/* Grid */
 .myGrid {
 	width: 100%;
 	min-height: 50%;
@@ -9,10 +55,32 @@
 	width: 700px;
 	max-height: 700px;
 	margin-bottom: 300px;
+	margin-top: 20px;
 }
 
-.page-title {
-	margin-bottom: 30px;
+.workspace-buttons {
+	margin-top: 20px;
+}
+
+/*********************
+ ** Saved styles
+ *********************/
+
+.grid-container {
+	padding-bottom: 30px;
+}
+
+.grid-container h3 {
+	margin-bottom: 20px;
+}
+
+.saved-datasets-container {
+	margin-bottom: 300px;
+}
+
+.saved-datasets-container h3 {
+	font-weight: bold;
+	letter-spacing: -1px;
 }
 
 .preview-grid {
@@ -20,25 +88,10 @@
 	height: 300px;
 }
 
-.grid-container {
-	padding-top: 30px;
-}
-
-.grid-container h3 {
-	margin-bottom: 20px;
-}
-
 .btn-container {
 	padding-left: 15px;
 	padding-right: 15px;
 }
-
-.saved-datasets-container {
-	margin-bottom: 300px;
-}
-
-
-
 
 
 
