@@ -1,0 +1,58 @@
+<!-- todo: toggle login/register and logout -->
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <img alt="Data Explorer" src="...">
+      </a>
+    </div>
+	  <ul class="nav navbar-nav">
+	    <li><a href="/">Workspace</a></li>
+	    <li class="active"><a href="/#/saved">Saved<span class="sr-only">(current)</span></a></li>
+	  </ul>
+  </div>
+</nav>
+
+<div class="container saved-datasets-container">
+	<h1 class="text-center page-title">Saved</h1>
+  <div class="row">
+    <div ng-repeat="dataset in trimmedDatasets">
+      <div class="col-sm-4 grid-container">
+        <h3 class="text-center">{{dataset.name}}</h4>
+          <div class="row btn-container">
+            <a class="col-sm-2 col-sm-offset-8 btn-default btn" ng-href="#/workspace/{{dataset.id}}">Load</a>
+            <button class="col-sm-2 btn btn-danger" ng-click="triggerDeleteModal(dataset.id)">Delete</button>
+          </div>
+        <div ui-grid="dataset.grid" class="preview-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete confirm modal -->
+<div class="modal fade" id="delete-confirm-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center">Are you sure you want to delete that?</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <button class="btn btn-default col-sm-3 col-sm-offset-1" data-dismiss="modal" ng-click="cancelDelete()">cancel</button>
+          <button class="btn btn-danger col-sm-3 col-sm-offset-4" data-dismiss="modal" ng-click="deleteDataset()">delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,154 @@
+<!-- todo: toggle login/register and logout -->
+<!-- todo: hide/show saved based on login? -->
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <img alt="Data Explorer" src="...">
+      </a>
+    </div>
+	  <ul class="nav navbar-nav">
+	    <li class="active"><a href="/">Workspace<span class="sr-only">(current)</span></a></li>
+	    <li><a href="/#/saved">Saved</a></li>
+	  </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+	<h1 class="text-center page-title">{{title}}</h1>
+
+	<!-- Styled button later triggers this button -->
+	<input type="file" name="file-input" accept=".csv" style="display: none;" id="file-input">
+
+	<!-- import data -->
+	<!-- chart and variable selection -->
+	<form class="form-horizontal">
+	  <div class="form-group">
+	  	<div class="col-sm-1">
+		  	<!-- trigger html5 button above -->
+		  	<input type="button" value="Import" onclick="$('#file-input').click()" class="btn btn-info btn-lg">
+	  	</div>
+	    <label for="chart-type" class="col-sm-1 control-label">Chart</label>
+	    <div class="col-sm-2">
+				<select ng-model="chartType" ng-change="updateChart(chartType)" id="chart-type" class="form-control">
+					<option value="column2d">Column chart</option>
+					<option value="line">Line chart</option>
+					<option value="pie2d">Pie chart</option>
+					<option value="scatter">Scatter chart</option>
+					<option value="boxandwhisker2d">Box and Whisker chart</option>
+					<option value="histogram">Histogram</option>
+				</select>
+	    </div>
+	    <label for="xVar" class="col-sm-1 control-label">X (Labels)</label>
+	    <div class="col-sm-2">
+				<select ng-model="xVar" id="xVar" class="form-control" ng-options="var.field for var in grid.columnDefs">
+				</select>
+	    </div>
+	    <label for="yVar" class="col-sm-1 control-label">Y (Values)</label>
+	    <div class="col-sm-2">
+				<select ng-model="yVar" id="yVar" class="form-control" ng-options="var.field for var in grid.columnDefs" ng-disabled="chartType === 'histogram'">
+				</select>
+	    </div>
+	    <div class="col-sm-1">
+	    	<button class="btn btn-lg btn-primary" ng-click="createPlot()">Plot</button>
+	    </div>
+	    <div class="col-sm-1">
+	    	<button class="btn btn-lg btn-success pull-right" ng-click="triggerSaveModal()" id="save-dataset-btn">Save</button>
+	    </div>
+	  </div>
+	</form>
+
+	<!-- grid -->
+	<div ui-grid="grid"
+			 class="myGrid center-block"
+			 ui-grid-auto-resize
+			 ui-grid-resize-columns
+			 ui-grid-move-columns></div>
+
+	<!-- chart -->
+	<div ng-switch="chartTypeShow" class="chartContainer center-block">
+		<div id="chart",
+	    fusioncharts
+	    ng-switch-when="column2d"
+	    width="700"
+	    height="700"
+	    type="column2d"
+	    datasource="{{chartSource}}"
+    ></div>
+		<div id="chart",
+	    fusioncharts
+	    ng-switch-when="line"
+	    width="700"
+	    height="700"
+	    type="line"
+	    datasource="{{chartSource}}"
+    ></div>
+		<div id="chart",
+	    fusioncharts
+	    ng-switch-when="pie2d"
+	    width="700"
+	    height="700"
+	    type="pie2d"
+	    datasource="{{chartSource}}"
+    ></div>
+		<div id="chart",
+	    fusioncharts
+	    ng-switch-when="scatter"
+	    width="700"
+	    height="700"
+	    type="scatter"
+	    datasource="{{chartSource}}"
+    ></div>
+		<div id="chart",
+	    fusioncharts
+	    ng-switch-when="boxandwhisker2d"
+	    width="700"
+	    height="700"
+	    type="boxandwhisker2d"
+	    datasource="{{chartSource}}"
+    ></div>
+	</div>
+
+</div>
+
+<!-- Add Dataset Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="add-dataset-modal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center">Dataset</h4>
+      </div>
+      <div class="modal-body">
+      	<p>What would you like this dataset to be saved as?</p>
+        <div class="form">
+        	<form class="form-group" ng-submit="saveDataset()">
+        		<label for="save-dataset-name">Name</label>
+        		<input type="text" class="form-control", id="save-dataset-name" placeholder="Cars dataset" required>
+        		<input type="submit" style="display: none;">
+        	</form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="saveDataset()">Submit</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

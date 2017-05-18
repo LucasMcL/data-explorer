@@ -1,0 +1,47 @@
+.myGrid {
+	width: 100%;
+	min-height: 50%;
+	resize: vertical;
+	overflow: scroll;
+}
+
+.chartContainer {
+	width: 700px;
+	max-height: 700px;
+	margin-bottom: 300px;
+}
+
+.page-title {
+	margin-bottom: 30px;
+}
+
+.preview-grid {
+	overflow-y: hidden;
+	height: 300px;
+}
+
+.grid-container {
+	padding-top: 30px;
+}
+
+.grid-container h3 {
+	margin-bottom: 20px;
+}
+
+.btn-container {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.saved-datasets-container {
+	margin-bottom: 300px;
+}
+
+
+
+
+
+
+
+
+

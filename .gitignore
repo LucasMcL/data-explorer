@@ -1,4 +1,6 @@
 client/lib
+.env
+models/test.js
 
 # Logs
 logs
