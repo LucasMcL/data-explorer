@@ -190,12 +190,8 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       })
       totals.push(total)
     }
-    console.log(min, max, binWidth)
-    console.log(totals)
 
     totals.forEach((total, i) => {
-      console.log(String(min) + " - " + String(min + ((i+1) * binWidth)))
-      console.log(binWidth)
       let datum = {}
       datum.label = (min + (i * binWidth)).toFixed(1) + " - " + (min + ((i+1) * binWidth)).toFixed(1)
       datum.value = total
