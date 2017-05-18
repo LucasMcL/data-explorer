@@ -97,6 +97,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       datum.value = row[yVar]
       $scope.chartSource.data.push(datum)
     })
+    $scope.chartSource.chart.caption = `${xVar} and ${yVar}`
     $scope.chartSource.chart.xAxisName = xVar
     $scope.chartSource.chart.yAxisName = yVar
 
@@ -106,6 +107,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   function createScatterplot(chartType, xVar, yVar) {
     resetChart()
     $scope.chartSource.dataset = [{showRegressionLine: 1, data: []}]
+    $scope.chartSource.chart.caption = `${xVar} and ${yVar}`
     $scope.chartSource.chart.xAxisName = xVar
     $scope.chartSource.chart.yAxisName = yVar
     $scope.gridApi.core.getVisibleRows().forEach(rowInfo => {
@@ -123,6 +125,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     resetChart()
     $scope.chartSource.categories = [{category: []}]
     $scope.chartSource.dataset = [{data: []}]
+    $scope.chartSource.chart.caption = `${xVar} and ${yVar}`
     $scope.chartSource.chart.xAxisName = String(xVar)
     $scope.chartSource.chart.yAxisName = String(yVar)
     let data = $scope.gridApi.core.getVisibleRows()
