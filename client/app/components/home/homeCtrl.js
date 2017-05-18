@@ -75,13 +75,15 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
   $scope.createPlot = function() {
     console.log('create plot')
 
+    if (!$scope.chartType) return alert('Please select chart type')
+    if (!$scope.xVar) return alert('Please select X (labels) variable')
     let chartType = $scope.chartType,
-        xVar = $scope.xVar.field,
-        yVar = $scope.yVar.field
+        xVar = $scope.xVar.field
 
-    if (!chartType) return alert('Please select chart type')
-    if (!xVar) return alert('Please select X (labels) variable')
-    if (!yVar) return alert('Please select Y (values) variable')
+    if(chartType === "histogram") return createHistogram(chartType, xVar)
+
+    if (!$scope.yVar) return alert('Please select Y (values) variable')
+    let yVar = $scope.yVar.field
 
     if(chartType === "scatter") return createScatterplot(chartType, xVar, yVar)
     else if(chartType === "boxandwhisker2d") return createBoxAndWhiskerPlot(chartType, xVar, yVar)
@@ -141,9 +143,9 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       })
     })
     // Create strings of values and push to "data" array
-    arrayOfUniqueXVars.forEach((uniqueVar, i) => {
+    arrayOfUniqueXVars.forEach(uniqueVar => {
       values = ""
-      data.forEach((rowInfo, j) => {
+      data.forEach(rowInfo => {
         let row = rowInfo.entity
         if(isNaN(row[yVar])) return
         if(row[xVar] === uniqueVar) values += (String(row[yVar]) + ',')
@@ -152,6 +154,55 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     })
     console.log($scope.chartSource)
     $scope.chartTypeShow = chartType
+  }
+
+  function createHistogram(chartType, xVar) {
+    const NUM_OF_BINS = 5
+    resetChart()
+    $scope.chartSource.chart.caption = `frequency of ${xVar}`
+    $scope.chartSource.chart.xAxisName = xVar
+    let data = $scope.gridApi.core.getVisibleRows()
+
+    // Find min / max value of xVar
+    let min = Number.POSITIVE_INFINITY
+    let max = Number.NEGATIVE_INFINITY
+    let tmp
+    for (var i = 0; i < data.length; i++) {
+      row = data[i].entity
+      tmp = row[xVar]
+      if(isNaN(tmp)) continue
+      if(tmp < min) min = tmp
+      if(tmp > max) max = tmp
+    }
+
+    let binWidth = Number(((max - min) / NUM_OF_BINS).toFixed(1))
+    // Sum number of instances in each bin
+    let totals = []
+    for(let i = 0; i < NUM_OF_BINS; i++) {
+      let total = 0
+      const BIN_LOWER = min + (i * binWidth),
+            BIN_UPPER = min + ((i+1) * binWidth)
+      data.forEach(rowInfo => {
+        let row = rowInfo.entity,
+            value = row[xVar]
+        if(value >= BIN_LOWER && value < BIN_UPPER) total++
+        if(i === NUM_OF_BINS - 1 && value === BIN_UPPER) total++
+      })
+      totals.push(total)
+    }
+    console.log(min, max, binWidth)
+    console.log(totals)
+
+    totals.forEach((total, i) => {
+      console.log(String(min) + " - " + String(min + ((i+1) * binWidth)))
+      console.log(binWidth)
+      let datum = {}
+      datum.label = (min + (i * binWidth)).toFixed(1) + " - " + (min + ((i+1) * binWidth)).toFixed(1)
+      datum.value = total
+      $scope.chartSource.data.push(datum)
+    })
+
+    $scope.chartTypeShow = 'column2d'
   }
 
   // reset chartSource data, dataset, and chart properties
