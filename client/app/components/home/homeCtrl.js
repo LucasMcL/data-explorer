@@ -112,6 +112,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     $scope.chartSource.chart.caption = `${xVar} and ${yVar}`
     $scope.chartSource.chart.xAxisName = xVar
     $scope.chartSource.chart.yAxisName = yVar
+    $scope.chartSource.chart.paletteColors = "#000000"
     $scope.gridApi.core.getVisibleRows().forEach(rowInfo => {
       row = rowInfo.entity
       let datum = {}
@@ -162,6 +163,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
     $scope.chartSource.chart.caption = `frequency of ${xVar}`
     $scope.chartSource.chart.xAxisName = xVar
     $scope.chartSource.chart.yAxisName = 'number of instances'
+    $scope.chartSource.chart.usePlotGradientColor = 0
     let data = $scope.gridApi.core.getVisibleRows()
 
     // Find min / max value of xVar
@@ -196,6 +198,7 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
       let datum = {}
       datum.label = (min + (i * binWidth)).toFixed(1) + " - " + (min + ((i+1) * binWidth)).toFixed(1)
       datum.value = total
+      datum.color = '#436AB2'
       $scope.chartSource.data.push(datum)
     })
 
