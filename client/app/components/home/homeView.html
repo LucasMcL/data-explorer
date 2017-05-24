@@ -13,7 +13,7 @@
 	    <li><a href="/#/saved">Saved</a></li>
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
-      <li><a href="">Login / Register</a></li>
+      <li><a href="" ng-click="showLoginModal()">Login / Register</a></li>
       <!-- <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -151,9 +151,65 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<!-- Login Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="login-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" class="form-control", id="login-email" placeholder="example@user.com" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" class="form-control", id="login-password" placeholder="********" required>
+          </div>
+        </div>
+        <a href="" ng-click="showRegisterModal()">Don't have an account?</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-
+<!-- Register Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="register-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Register</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form">
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input type="email" class="form-control", id="register-email" placeholder="example@user.com" required>
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input type="password" class="form-control", id="register-password" placeholder="********" required>
+          </div>
+          <div class="form-group">
+            <label for="register-display-name">Display name</label>
+            <input type="text" class="form-control", id="register-display-name" placeholder="Jeff" required>
+          </div>
+          <a href="" ng-click="showLoginModal()">Already have an account?</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

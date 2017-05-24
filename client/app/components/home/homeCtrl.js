@@ -241,6 +241,16 @@ app.controller('HomeCtrl', function($scope, $rootScope, $compile, uiGridConstant
         else return alert('Successfully saved')
       })
   }
+
+  $scope.showLoginModal = function() {
+    $('#register-modal').modal('hide')
+    $('#login-modal').modal()
+  }
+
+  $scope.showRegisterModal = function() {
+    $('#login-modal').modal('hide')
+    $('#register-modal').modal()
+  }
 })
 
 
