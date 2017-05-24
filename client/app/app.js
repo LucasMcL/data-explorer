@@ -12,6 +12,16 @@ const app = angular.module('DataExplorer',
 app.config(($routeProvider, $locationProvider) => {
   console.log('Config executing')
 
+  // Initialize Firebase
+  firebase.initializeApp({
+    apiKey: "AIzaSyDmbf13gwLwunc9Z7PSb-x7V-mLHULUCH4",
+    authDomain: "data-explorer-36101.firebaseapp.com",
+    databaseURL: "https://data-explorer-36101.firebaseio.com",
+    projectId: "data-explorer-36101",
+    storageBucket: "data-explorer-36101.appspot.com",
+    messagingSenderId: "599963099080"
+  });
+
   $locationProvider.hashPrefix('')
 
   $routeProvider
